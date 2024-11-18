@@ -5,43 +5,41 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.sushkpavel.whmngr.presentation.theme.MyApplicationTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.sushkpavel.whmngr.R
+import com.sushkpavel.whmngr.presentation.screens.LoginScreen
+import com.sushkpavel.whmngr.presentation.navigation.routes.ScreenLogin
+import com.sushkpavel.whmngr.presentation.theme.WhManagerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyApplicationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+            WhManagerTheme {
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = ScreenLogin
+                ) {
+                    composable<ScreenLogin> {
+                        LoginScreen(
+                            modifier = Modifier.fillMaxSize(),
+                            navController = navController,
+                            loginText = getString(R.string.login),
+                            emailLabel = getString(R.string.email),
+                            passwordLabel = getString(R.string.password),
+                            emptyFieldNotification = getString(R.string.empty_field_notification)
+                        )
+                    }
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyApplicationTheme {
-        Greeting("Android")
-    }
-}
+
