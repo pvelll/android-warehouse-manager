@@ -10,8 +10,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sushkpavel.whmngr.R
-import com.sushkpavel.whmngr.presentation.screens.LoginScreen
+import com.sushkpavel.whmngr.presentation.navigation.AppNavHost
+import com.sushkpavel.whmngr.presentation.screens.login.LoginScreen
 import com.sushkpavel.whmngr.presentation.navigation.routes.ScreenLogin
+import com.sushkpavel.whmngr.presentation.navigation.routes.ScreenRegistration
+import com.sushkpavel.whmngr.presentation.screens.register.RegistrationScreen
 import com.sushkpavel.whmngr.presentation.theme.WhManagerTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,21 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WhManagerTheme {
                 val navController = rememberNavController()
-                NavHost(
-                    navController = navController,
-                    startDestination = ScreenLogin
-                ) {
-                    composable<ScreenLogin> {
-                        LoginScreen(
-                            modifier = Modifier.fillMaxSize(),
-                            navController = navController,
-                            loginText = getString(R.string.login),
-                            emailLabel = getString(R.string.email),
-                            passwordLabel = getString(R.string.password),
-                            emptyFieldNotification = getString(R.string.empty_field_notification)
-                        )
-                    }
-                }
+                AppNavHost(navController)
             }
         }
     }
