@@ -26,20 +26,16 @@ import com.sushkpavel.whmngr.presentation.navigation.routes.ScreenLogin
 import com.sushkpavel.whmngr.presentation.utils.ClickableText
 import com.sushkpavel.whmngr.presentation.utils.CustomButton
 import com.sushkpavel.whmngr.presentation.utils.CustomOutlinedTextField
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun RegistrationScreen(
     modifier: Modifier = Modifier.fillMaxSize(),
-    navController: NavHostController = rememberNavController(),
+    navController: NavHostController,
+    viewModel: RegistrationViewModel = koinViewModel()
 ) {
-    var name by remember { mutableStateOf("") }
-    var country by remember { mutableStateOf("") }
-    var address by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var isError by remember { mutableStateOf(false) }
+    val registrationState by viewModel.registrationState
 
     Column(
         modifier = modifier
@@ -54,64 +50,58 @@ fun RegistrationScreen(
             modifier = Modifier.padding(bottom = 16.dp)
         )
         CustomOutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
+            value = registrationState.name,
+            onValueChange = { viewModel.onNameChange(it) },
             label = stringResource(R.string.name),
-            isError = isError
+            isError = registrationState.isError
         )
         Spacer(modifier = Modifier.height(8.dp))
         CustomOutlinedTextField(
-            value = country,
-            onValueChange = { country = it },
+            value = registrationState.country,
+            onValueChange = { viewModel.onCountryChange(it) },
             label = stringResource(R.string.country),
-            isError = isError
+            isError = registrationState.isError
         )
         Spacer(modifier = Modifier.height(8.dp))
         CustomOutlinedTextField(
-            value = address,
-            onValueChange = { address = it },
+            value = registrationState.address,
+            onValueChange = { viewModel.onAddressChange(it) },
             label = stringResource(R.string.address),
-            isError = isError
+            isError = registrationState.isError
         )
         Spacer(modifier = Modifier.height(8.dp))
         CustomOutlinedTextField(
-            value = phone,
-            onValueChange = { phone = it },
+            value = registrationState.phone,
+            onValueChange = { viewModel.onPhoneChange(it) },
             label = stringResource(R.string.phone),
-            isError = isError
+            isError = registrationState.isError
         )
         Spacer(modifier = Modifier.height(8.dp))
         CustomOutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
+            value = registrationState.email,
+            onValueChange = { viewModel.onEmailChange(it) },
             label = stringResource(R.string.email),
-            isError = isError
+            isError = registrationState.isError
         )
         Spacer(modifier = Modifier.height(8.dp))
         CustomOutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
+            value = registrationState.password,
+            onValueChange = { viewModel.onPasswordChange(it) },
             label = stringResource(R.string.password),
-            isError = isError,
+            isError = registrationState.isError,
             visualTransformation = PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.height(16.dp))
         CustomButton(
             text = stringResource(R.string.register),
-            onClick = {
-                if (name.isNotEmpty() && country.isNotEmpty() && address.isNotEmpty() && phone.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                    // navController.navigate(ScreenHome)
-                } else {
-                    isError = true
-                }
-            }
+            onClick = { viewModel.onRegisterClick() }
         )
         Spacer(modifier = Modifier.height(16.dp))
         ClickableText(
             text = stringResource(R.string.already_have_account),
             onClick = { navController.navigate(ScreenLogin) }
         )
-        if (isError) {
+        if (registrationState.isError) {
             Text(
                 text = stringResource(R.string.empty_field_notification),
                 color = MaterialTheme.colorScheme.error,
@@ -124,5 +114,6 @@ fun RegistrationScreen(
 @Preview(showBackground = true)
 @Composable
 fun RegistrationScreenPreview() {
-    RegistrationScreen()
+
+    RegistrationScreen(navController = rememberNavController(), viewModel = RegistrationViewModel())
 }

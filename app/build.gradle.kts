@@ -41,6 +41,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.core.ktx)
