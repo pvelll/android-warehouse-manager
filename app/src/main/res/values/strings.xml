@@ -5,4 +5,11 @@
     <string name="password">Password</string>
     <string name="empty_field_notification">Please enter both username and password</string>
     <string name="no_account_notification">Doesn\'t have an account?</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="register">Register</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="country">Country</string>
+    <string name="name">Name</string>
+    <string name="registration">Registration</string>
 </resources>
