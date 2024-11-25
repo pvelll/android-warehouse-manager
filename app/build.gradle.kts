@@ -44,6 +44,11 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
 
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.client.json)
+
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.core.ktx)

@@ -1,5 +1,8 @@
 package com.sushkpavel.whmngr.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Token(
     val token: String,
     val userId: Long,
