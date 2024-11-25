@@ -1,10 +1,15 @@
-package com.sushkpavel.whmngr.data.model
+package com.sushkpavel.whmngr.domain.model
 
-data class Token(
-    val token: String,
-    val userId: Long,
+
+data class Manager(
+    var id: Long,
+    val name: String,
+    val company: String,
+    val companyId: Long? = null,
+    val phone: String,
+    val email: String,
+    val password: String,
     val type: Int,
-//    0 - Клиент
 //    1 - менеджер по закупкам
 //    2- Менеджер по работе заказчиками
 //    3 - Кладовщик
